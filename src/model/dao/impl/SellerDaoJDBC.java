@@ -57,19 +57,10 @@ public class SellerDaoJDBC implements SellerDao{
 			//testar se veio algum resultado (true).
 			if (resultSet.next()) {
 				// instancia um departamento e seta os valores dele.
-				Department department = new Department();
-				department.setId(resultSet.getInt("DepartmentId"));
-				department.setName(resultSet.getString("DepName"));
+				Department department = instantiateDepartment(resultSet);
 				
 				//cria um objeto Seller apontando pro Department
-				Seller seller = new Seller();
-				seller.setId(resultSet.getInt("Id"));
-				seller.setName(resultSet.getString("Name"));
-				seller.setEmail(resultSet.getString("Email"));
-				seller.setBaseSalary(resultSet.getDouble("BaseSalary"));
-				seller.setBirthDate(resultSet.getDate("BirthDate"));
-				// não é o Id do Department, e sim o objeto inteiro.
-				seller.setDepartment(department);
+				Seller seller = instantiateSeller(resultSet, department);
 				return seller;
 			}
 			return null;
@@ -86,6 +77,25 @@ public class SellerDaoJDBC implements SellerDao{
 			DB.closeStatement(preparedStatement);
 			DB.closeResultSet(resultSet);
 		}
+	}
+
+	private Seller instantiateSeller(ResultSet resultSet, Department department) throws SQLException {
+		Seller seller = new Seller();
+		seller.setId(resultSet.getInt("Id"));
+		seller.setName(resultSet.getString("Name"));
+		seller.setEmail(resultSet.getString("Email"));
+		seller.setBaseSalary(resultSet.getDouble("BaseSalary"));
+		seller.setBirthDate(resultSet.getDate("BirthDate"));
+		// não é o Id do Department, e sim o objeto inteiro.
+		seller.setDepartment(department);
+		return seller;
+	}
+
+	private Department instantiateDepartment(ResultSet resultSet) throws SQLException {
+		Department department = new Department();
+		department.setId(resultSet.getInt("DepartmentId"));
+		department.setName(resultSet.getString("DepName"));
+		return department;
 	}
 
 	@Override
