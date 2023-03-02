@@ -1,7 +1,6 @@
 package application;
 
-import java.sql.Connection;
-import java.sql.Statement;
+import model.entities.Department;
 
 // Padrão de Projeto DAO (Data Access Object)
 public class Program {
@@ -17,10 +16,7 @@ public class Program {
 	 */
 	public static void main(String[] args) {
 
-		Connection ct = null;
-		Statement st = null;
-		
-		 
-			
+		Department d = new Department(1, "books");		
+		System.out.println(d);
 	}
 }
