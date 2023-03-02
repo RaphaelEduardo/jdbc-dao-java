@@ -1,10 +1,7 @@
 package application;
 
-import java.util.Date;
-
 import model.dao.DaoFactory;
 import model.dao.SellerDao;
-import model.entities.Department;
 import model.entities.Seller;
 
 // Padrão de Projeto DAO (Data Access Object)
@@ -20,15 +17,12 @@ public class Program {
 	 * pode ser feita por meio do Padrão Factory.
 	 */
 	public static void main(String[] args) {
-
-		Department d = new Department(1, "books");		
-		System.out.println(d);
-		
-		Seller s = new Seller(7 ,"Raphael", "raphael@gmail.com", new Date(), 3000.00, d);
-		System.out.println(s);
 		
 		SellerDao sellerDao = DaoFactory.createSellerDao();
 	
+		Seller seller = sellerDao.findById(3);
+		System.out.println(seller);
+		
 	}
 	
 }
