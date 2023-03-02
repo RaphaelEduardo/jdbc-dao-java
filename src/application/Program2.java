@@ -15,7 +15,7 @@ public class Program2 {
 		Scanner sc = new Scanner(System.in);
 		
 		DepartmentDao departmentDao = DaoFactory.createDepartmentDao();
-	
+
 		System.out.println("======= TEST 1: department findById =======");
 		Department department= departmentDao.findById(3);
 		System.out.println(department);
@@ -36,7 +36,12 @@ public class Program2 {
 		department.setName("Drinks");
 		departmentDao.update(department);
 		System.out.println("Update completed");
-		
+
+		System.out.println("\n======= TEST 5: department delete =======");
+		System.out.print("Enter id for delete test: ");
+		int id = sc.nextInt();
+		departmentDao.deleteById(id);
+		System.out.println("Delete completed");
 		
 		sc.close();
 	}
